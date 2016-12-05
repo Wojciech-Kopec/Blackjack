@@ -1,4 +1,4 @@
-package com.wojci.tests;
+﻿package com.wojci.tests;
 
 import com.wojci.cards.Card;
 import com.wojci.cards.Deck;
@@ -10,10 +10,6 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
-
-/**
- * Created by Wojciech Kopeć on 02.12.2016.
- */
 public class DeckTest {
 
     Deck deck = new Deck();
