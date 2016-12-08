@@ -1,4 +1,4 @@
-package com.wojci.blackjack;
+package com.blackjack;
 
 
 public class App {

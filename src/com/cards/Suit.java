@@ -1,4 +1,4 @@
-package com.wojci.cards;
+package com.cards;
 
 
 public enum Suit {

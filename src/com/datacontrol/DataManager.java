@@ -1,6 +1,10 @@
-﻿package com.wojci.blackjack;
+﻿package com.datacontrol;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.time.Instant;
+import java.util.Date;
 
 /**
  * DataReader class will be responsible for following functions:
@@ -8,15 +12,15 @@ import java.io.File;
  * - Save Player's name to file along with starting time of the game session
  * ---Check if in file - Appropriate welcome message
  * - Update W/P/L statistics throughout game session - updated after every game
- * - While exiting game-loop write game data -> player's name, time started, time elapsed. W/P/L stats, end balance to appropriate section
+ * - While exiting game-loop write game data -> Player's name, time started, time elapsed. W/P/L stats, end balance to appropriate section
  * ---Check if qualified for High-score section - Put in High-score table with printed message.
  *
  * METHODS
  * DataManager()
  * checkIfFileExists()
- * checkIfPlayerPlayedBefore
- * savePlayerStatsToFile
- * checkIfQualifiedForHighscore
+ * checkIfPlayerPlayedBefore()
+ * savePlayerStatsToFile()
+ * checkIfQualifiedForHighscore()
  * printFile();
  */
 

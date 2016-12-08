@@ -1,9 +1,9 @@
-﻿package com.wojci.tests;
+﻿package com.tests;
 
-import com.wojci.cards.Card;
-import com.wojci.cards.Deck;
-import com.wojci.cards.Rank;
-import com.wojci.cards.Suit;
+import com.cards.Card;
+import com.cards.Deck;
+import com.cards.Rank;
+import com.cards.Suit;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;

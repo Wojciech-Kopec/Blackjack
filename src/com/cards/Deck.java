@@ -1,4 +1,4 @@
-package com.wojci.cards;
+package com.cards;
 
 import java.util.ArrayList;
 import java.util.Collections;

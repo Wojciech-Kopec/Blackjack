@@ -1,6 +1,6 @@
-package com.wojci.blackjack;
+package com.blackjack;
 
-import com.wojci.cards.Deck;
+import com.cards.Deck;
 
 import java.util.Scanner;
 
@@ -13,15 +13,10 @@ import java.util.Scanner;
 
 class Blackjack {
     private Scanner input = new Scanner(System.in);
-    private int playerMoney = 1000;
-    private String playerName;
     private int playerBet;
     private int response;
     private boolean isBust;
     private boolean hasDealerWon;
-    private int loses;
-    private int pushes;
-    private int wins;
 
     private final int DRAW_LIMIT = 21;
     private final int DEALERS_DRAW_LIMIT = 17;
