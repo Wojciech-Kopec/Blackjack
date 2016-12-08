@@ -3,9 +3,7 @@ package com.wojci.cards;
 import java.util.ArrayList;
 import java.util.Collections;
 
-/**
- * Created by testuj on 2016-11-21.
- */
+
 public class Deck {
 
     private ArrayList<Card> cards;

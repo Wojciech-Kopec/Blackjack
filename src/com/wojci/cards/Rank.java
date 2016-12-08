@@ -1,7 +1,7 @@
 package com.wojci.cards;
 
-/**
- * Created by testuj on 2016-11-21.
+/** TODO
+        Rank linked with Value - Ace case
  */
 public enum Rank {
 

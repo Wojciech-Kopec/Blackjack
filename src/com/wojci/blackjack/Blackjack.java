@@ -5,18 +5,45 @@ import com.wojci.cards.Deck;
 import java.util.Scanner;
 
 /**
- * Created by testuj on 2016-11-21.
+ * TODO
+ * (?)  Response validation -> As String, REGEX validation
+ * (?)  FINAL variables
+ *      Full tests coverage
  */
+
 class Blackjack {
     private Scanner input = new Scanner(System.in);
     private int playerMoney = 1000;
+    private String playerName;
     private int playerBet;
     private int response;
+    private boolean isBust;
+    private boolean hasDealerWon;
+    private int loses;
+    private int pushes;
+    private int wins;
+
+    private final int DRAW_LIMIT = 21;
+    private final int DEALERS_DRAW_LIMIT = 17;
     private Deck playingDeck = new Deck();
     private Deck playerHand = new Deck();
     private Deck dealerHand = new Deck();
-    private boolean isBust;
-    private boolean hasDealerWon;
+
+    public String getPlayerName() {
+        return playerName;
+    }
+    public int getLoses() {
+        return loses;
+    }
+    public int getPushes() {
+        return pushes;
+    }
+    public int getWins() {
+        return wins;
+    }
+    public int getPlayerMoney() {
+        return playerMoney;
+    }
 
 
     void run() {
@@ -29,9 +56,8 @@ class Blackjack {
     private void gameLoop() {
         while (playerMoney > 0) {
             getPlayerBet(playerMoney);
-            firstDeal();
+            initialDraw();
             playersTurn();
-            //boolean vars to not load boolean methods once more
             if (!isBust) {
                 dealersTurn();
                 if(!hasDealerWon)
@@ -53,7 +79,7 @@ class Blackjack {
         return playerBet;
     }
 
-    private void firstDeal() {
+    private void initialDraw() {
         playerHand.draw(playingDeck);
         playerHand.draw(playingDeck);
         dealerHand.draw(playingDeck);
@@ -85,7 +111,7 @@ class Blackjack {
 
     private boolean hasPlayerBusted() {
         isBust = false;
-        if (playerHand.cardsValue() > 21) {
+        if (playerHand.cardsValue() > DRAW_LIMIT) {
             System.out.println("BUST!\nYour total value is currently: " + playerHand.cardsValue());
             System.out.println("Dealer wins.\n");
             playerMoney -= playerBet;
@@ -99,12 +125,11 @@ class Blackjack {
         System.out.println("Dealer's hand is valued at: " + dealerHand.cardsValue() + "\n");
         if (checkIfDealerWinWithoutDrawing())
         return;
-        while (dealerHand.cardsValue() < 17) {
+        while (dealerHand.cardsValue() < DEALERS_DRAW_LIMIT) {
             dealerHand.draw(playingDeck);
             System.out.println("Dealer draws: " + dealerHand.getCard(dealerHand.handSize() - 1).toString());
             System.out.println("Dealer's hand is valued at: " + dealerHand.cardsValue() + "\n");
         }
-
     }
 
     private boolean checkIfDealerWinWithoutDrawing() {
@@ -118,7 +143,7 @@ class Blackjack {
     }
 
     private void determineWinner() {
-        if (dealerHand.cardsValue() > 21) {
+        if (dealerHand.cardsValue() > DRAW_LIMIT) {
             System.out.println("Dealer busts! YOU WIN!\n");
             playerMoney += playerBet;
             return;
