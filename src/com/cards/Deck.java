@@ -31,6 +31,10 @@ public class Deck {
         return deckOutput;
     }
 
+    private void addCard(Card addCard){
+        cards.add(addCard);
+    }
+
     private void removeCard(int i){
         cards.remove(i);
     }
@@ -39,8 +43,8 @@ public class Deck {
         return cards.get(i);
     }
 
-    public void addCard(Card addCard){
-        cards.add(addCard);
+    public int getSize(){
+        return this.cards.size();
     }
 
     public void draw(Deck comingFrom){
@@ -48,15 +52,11 @@ public class Deck {
         comingFrom.removeCard(0);
     }
 
-    public int handSize(){
-        return this.cards.size();
-    }
-
     public int cardsValue(){
         int totalValue = 0;
         for(Card card: cards) {
             totalValue += card.getRank().getValue();
-            if (card.getRank() == Rank.ACE && totalValue < 11)
+            if (card.getRank() == Rank.ACE && totalValue <= 11)
                 totalValue += 10;
         }
         return totalValue;

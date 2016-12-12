@@ -87,7 +87,7 @@ class Blackjack {
 
     private void playerHit() {
         playerHand.draw(playingDeck);
-        System.out.println("You draw a: " + playerHand.getCard(playerHand.handSize() - 1).toString());
+        System.out.println("You draw a: " + playerHand.getCard(playerHand.getSize() - 1).toString());
     }
 
     private boolean hasPlayerBusted() {
@@ -109,7 +109,7 @@ class Blackjack {
         final int DEALERS_DRAW_LIMIT = 17;
         while (dealerHand.cardsValue() < DEALERS_DRAW_LIMIT) {
             dealerHand.draw(playingDeck);
-            System.out.println("Dealer draws: " + dealerHand.getCard(dealerHand.handSize() - 1).toString());
+            System.out.println("Dealer draws: " + dealerHand.getCard(dealerHand.getSize() - 1).toString());
             System.out.println("Dealer's hand is valued at: " + dealerHand.cardsValue() + "\n");
         }
     }

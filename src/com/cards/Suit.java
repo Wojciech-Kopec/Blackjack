@@ -1,7 +1,7 @@
 package com.cards;
 
 
-public enum Suit {
+enum Suit {
 
     CLUBS, DIAMONDS, SPADES, HEARTS
 }
