@@ -2,21 +2,19 @@ package com.cards;
 
 
 public class Card {
-
     private Suit suit;
-    private Rank value;
-    private int realValue;
+    private Rank rank;
 
     public Card(Suit suit, Rank value){
-        this. value = value;
+        this.rank = value;
         this.suit = suit;
     }
 
     public String toString(){
-        return this.value.toString() + " of " + this.suit.toString();
+        return this.rank.toString() + " of " + this.suit.toString();
     }
 
-    Rank getValue(){
-        return this.value;
+    Rank getRank(){
+        return this.rank;
     }
 }

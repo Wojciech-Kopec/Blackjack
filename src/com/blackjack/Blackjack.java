@@ -20,7 +20,7 @@ class Blackjack {
     private boolean isBust;
     private boolean hasDealerWon;
 
-    private final int DRAW_LIMIT = 21;
+    private final int BLACKJACK_LIMIT = 21;
 
     private Player player = new Player();
     private Deck playingDeck = new Deck();
@@ -92,7 +92,7 @@ class Blackjack {
 
     private boolean hasPlayerBusted() {
         isBust = false;
-        if (playerHand.cardsValue() > DRAW_LIMIT) {
+        if (playerHand.cardsValue() > BLACKJACK_LIMIT) {
             System.out.println("BUST!\nYour total value is currently: " + playerHand.cardsValue());
             System.out.println("Dealer wins.\n");
             player.setPlayerMoney(player.getPlayerMoney() - playerBet);
@@ -125,7 +125,7 @@ class Blackjack {
     }
 
     private void determineWinner() {
-        if (dealerHand.cardsValue() > DRAW_LIMIT) {
+        if (dealerHand.cardsValue() > BLACKJACK_LIMIT) {
             System.out.println("Dealer busts! YOU WIN!\n");
             player.setPlayerMoney(player.getPlayerMoney() + playerBet);
             return;

@@ -1,4 +1,4 @@
-﻿package com.datacontrol;
+package com.datacontrol;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -36,11 +36,11 @@ public class DataManager {
             try {
                 fileExists = file.createNewFile();
             } catch (IOException e) {
-                System.out.println("Nie udało się utworzyć pliku");
+                System.out.println("Nie uda?o si? utworzy? pliku");
             }
         }
         if (fileExists)
-            System.out.println("Plik " + FILE_NAME + " istnieje lub został utworzony");
+            System.out.println("Plik " + FILE_NAME + " istnieje lub zosta? utworzony");
     }
 
 

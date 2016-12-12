@@ -1,5 +1,6 @@
 package com.datacontrol;
 
+import java.io.Serializable;
 import java.time.Duration;
 import java.util.Date;
 
@@ -9,7 +10,7 @@ import java.util.Date;
  * Initialize duration
  * Attach timestamp
  */
-public class Player {
+public class Player implements Serializable {
     private int playerMoney = 1000;
     private String playerName;
     private int wins;
