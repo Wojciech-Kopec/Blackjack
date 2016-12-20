@@ -19,8 +19,9 @@ public class Player implements Serializable {
     private Date Timestamp;
     private Duration timePlayed;
 
-
-
+    public int incrementByOne(int variable){
+        return variable+=1;
+    }
 
     public int getPlayerMoney() {
         return playerMoney;

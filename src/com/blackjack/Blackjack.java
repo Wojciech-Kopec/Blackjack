@@ -1,6 +1,7 @@
 package com.blackjack;
 
 import com.cards.Deck;
+import com.cards.Hand;
 import com.datacontrol.Player;
 
 import java.util.Scanner;
@@ -24,8 +25,8 @@ class Blackjack {
 
     private Player player = new Player();
     private Deck playingDeck = new Deck();
-    private Deck playerHand = new Deck();
-    private Deck dealerHand = new Deck();
+    private Hand playerHand = new Hand();
+    private Hand dealerHand = new Hand();
 
     void run() {
         System.out.println("Welcome to Blackjack console application!\n");
