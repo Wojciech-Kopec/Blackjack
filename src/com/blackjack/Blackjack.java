@@ -118,7 +118,7 @@ class Blackjack {
     private boolean checkIfDealerWinWithoutDrawing() {
         hasDealerWon = false;
         if (dealerHand.cardsValue() > playerHand.cardsValue()) {
-            System.out.println("Dealer wins. You lose " + playerBet + "\n");
+            System.out.println("Dealer wins. You lose $" + playerBet + "\n");
             player.setPlayerMoney(player.getPlayerMoney() - playerBet);
             hasDealerWon = true;
         }
@@ -140,7 +140,7 @@ class Blackjack {
             player.setPlayerMoney(player.getPlayerMoney() + playerBet);
         }
         if (dealerHand.cardsValue() > playerHand.cardsValue()) {
-            System.out.println("Dealers wins. You lose." + playerBet + "\n");
+            System.out.println("Dealers wins. You lose $" + playerBet + "\n");
             player.setPlayerMoney(player.getPlayerMoney() - playerBet);
         }
     }
