@@ -3,24 +3,25 @@ package com.cards;
 import java.util.ArrayList;
 import java.util.Collections;
 
-
 public class Deck {
-    private ArrayList<Card> cards;
+    protected ArrayList<Card> cards;
 
     public Deck() {
         cards = new ArrayList<>();
+        createFullDeck();
+        shuffle();
     }
 
-    public void createFullDeck() {
+    private void createFullDeck() {
         for (Suit cardSuit : Suit.values()) {
             for (Rank cardRank : Rank.values()) {
-                this.cards.add(new Card(cardSuit, cardRank));
+                cards.add(new Card(cardSuit, cardRank));
             }
         }
     }
 
-    public void shuffle(){
-        Collections.shuffle(this.cards);
+    private void shuffle(){
+        Collections.shuffle(cards);
     }
 
     void addCard(Card addCard){

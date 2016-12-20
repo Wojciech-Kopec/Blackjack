@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 public class Hand extends Deck {
 
-    private ArrayList<Card> cards;
-
     public Hand() {
         cards = new ArrayList<>();
     }
@@ -38,19 +36,9 @@ public class Hand extends Deck {
     }
 
     public void moveAllToDeck(Deck moveTo){
-        int thisDeckSize = cards.size();
-        for (int i = thisDeckSize - 1; i >= 0; i--){
-            moveTo.addCard(getCard(i));
+        for (int i = getSize() - 1; i >= 0; i--){
+            moveTo.addCard(this.getCard(i));
             removeCard(i);
         }
     }
-
-
-
-
-
-
-
-
-
 }

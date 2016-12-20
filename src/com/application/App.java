@@ -1,5 +1,7 @@
-package com.blackjack;
+package com.application;
 
+
+import com.blackjack.Blackjack;
 
 public class App {
     public static void main(String[] args) {

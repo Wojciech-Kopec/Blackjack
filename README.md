@@ -1,2 +1,2 @@
 # Blackjack
-My own application working in command console allowing to play Blackjack.
+My own com.application working in command console allowing to play Blackjack.

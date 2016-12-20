@@ -9,56 +9,59 @@ import java.util.Scanner;
 /**
  * TODO
  * (?)  Response validation -> As String, REGEX validation OR ENUM(?)
- *                  -> HIT, STAND, DOUBLE DOWN, SPLIT, INSURANCE (?)
+ * -> HIT, STAND, DOUBLE DOWN, SPLIT, INSURANCE (?)
  * (?)  FINAL variables
- *      Full tests coverage
+ * Full tests coverage
  */
 
-class Blackjack {
-    private Scanner input = new Scanner(System.in);
-    private int playerBet;
-    private int response;
-    private boolean isBust;
-    private boolean hasDealerWon;
-
-    private final int BLACKJACK_LIMIT = 21;
-
+public class Blackjack {
     private Player player = new Player();
     private Deck playingDeck = new Deck();
     private Hand playerHand = new Hand();
     private Hand dealerHand = new Hand();
+    private Scanner input = new Scanner(System.in);
+    private int bet;
+    private int response;
+    private boolean isBust;
+    private boolean hasDealerWon;
+    private final int BLACKJACK_LIMIT = 21;
 
-    void run() {
-        System.out.println("Welcome to Blackjack console application!\n");
-        playingDeck.createFullDeck();
-        playingDeck.shuffle();
+    public void run() {
+        System.out.println("Welcome to Blackjack console com.application!\n");
+        getPlayerName();
         gameLoop();
     }
 
+    private void getPlayerName() {
+        System.out.println("Please state your name: ");
+        player.setPlayerName(input.nextLine());
+        /* TODO Check if in database - Welcome msg */
+    }
+
     private void gameLoop() {
-        while (player.getPlayerMoney() > 0) {
-            getPlayerBet(player.getPlayerMoney());
+        while (player.getBalance() > 0) {
+            getPlayerBet();
             initialDraw();
             playersTurn();
             if (!isBust) {
                 dealersTurn();
-                if(!hasDealerWon)
-                determineWinner();
+                if (!hasDealerWon)
+                    determineWinner();
             }
             clearHands();
         }
-        System.out.println("\nYou are out of money!\nGAME OVER.");
-        input.close();
+        printPlayerStatistics();
     }
 
-    private int getPlayerBet(int playerMoney) {
+    private int getPlayerBet() {
         do {
-            System.out.println("Currently you have $" + playerMoney + "\nHow much would you like to bet?");
-            playerBet = input.nextInt();
-            if (playerBet > playerMoney)
+            System.out.println("Currently you have $" + player.getBalance() + "\nHow much would you like to bet?");
+            /* TODO INPUT VALIDATION */
+            bet = input.nextInt();
+            if (bet > player.getBalance())
                 System.out.println("You cannot bet more than you have\n");
-        } while (playerBet > playerMoney);
-        return playerBet;
+        } while (bet > player.getBalance());
+        return bet;
     }
 
     private void initialDraw() {
@@ -75,13 +78,17 @@ class Blackjack {
             System.out.println("Dealer hand: " + dealerHand.getCard(0).toString() + " and [HIDDEN]");
             getPlayersResponse();
         }
+        resetResponse();
+    }
+
+    private void resetResponse() {
         response = 0;
     }
 
     private void getPlayersResponse() {
         System.out.println("Would you like to (1)Hit or (2)Stand?");
+            /* TODO input validation */
         response = input.nextInt();
-        //TODO input validation
         if (response == 1)
             playerHit();
     }
@@ -96,7 +103,8 @@ class Blackjack {
         if (playerHand.cardsValue() > BLACKJACK_LIMIT) {
             System.out.println("BUST!\nYour total value is currently: " + playerHand.cardsValue());
             System.out.println("Dealer wins.\n");
-            player.setPlayerMoney(player.getPlayerMoney() - playerBet);
+            player.decrementPlayerBalanceByBet(bet);
+            player.incrementLosesByOne();
             isBust = true;
         }
         return isBust;
@@ -106,7 +114,7 @@ class Blackjack {
         System.out.println("Dealer hand:\n" + dealerHand.toString());
         System.out.println("Dealer's hand is valued at: " + dealerHand.cardsValue() + "\n");
         if (checkIfDealerWinWithoutDrawing())
-        return;
+            return;
         final int DEALERS_DRAW_LIMIT = 17;
         while (dealerHand.cardsValue() < DEALERS_DRAW_LIMIT) {
             dealerHand.draw(playingDeck);
@@ -118,8 +126,9 @@ class Blackjack {
     private boolean checkIfDealerWinWithoutDrawing() {
         hasDealerWon = false;
         if (dealerHand.cardsValue() > playerHand.cardsValue()) {
-            System.out.println("Dealer wins. You lose $" + playerBet + "\n");
-            player.setPlayerMoney(player.getPlayerMoney() - playerBet);
+            System.out.println("Dealer wins. You lose $" + bet + "\n");
+            player.decrementPlayerBalanceByBet(bet);
+            player.incrementLosesByOne();
             hasDealerWon = true;
         }
         return hasDealerWon;
@@ -128,25 +137,36 @@ class Blackjack {
     private void determineWinner() {
         if (dealerHand.cardsValue() > BLACKJACK_LIMIT) {
             System.out.println("Dealer busts! YOU WIN!\n");
-            player.setPlayerMoney(player.getPlayerMoney() + playerBet);
+            player.incrementPlayerBalanceByBet(bet);
+            player.incrementWinsByOne();
             return;
         }
         if (playerHand.cardsValue() == dealerHand.cardsValue()) {
             System.out.println("PUSH. No one wins this round.\n");
-
+            player.incrementPushesByOne();
         }
         if (playerHand.cardsValue() > dealerHand.cardsValue()) {
             System.out.println("YOU WIN!\n");
-            player.setPlayerMoney(player.getPlayerMoney() + playerBet);
+            player.incrementPlayerBalanceByBet(bet);
+            player.incrementWinsByOne();
         }
         if (dealerHand.cardsValue() > playerHand.cardsValue()) {
-            System.out.println("Dealers wins. You lose $" + playerBet + "\n");
-            player.setPlayerMoney(player.getPlayerMoney() - playerBet);
+            System.out.println("Dealers wins. You lose $" + bet + "\n");
+            player.decrementPlayerBalanceByBet(bet);
+            player.incrementLosesByOne();
         }
     }
 
     private void clearHands() {
         playerHand.moveAllToDeck(playingDeck);
         dealerHand.moveAllToDeck(playingDeck);
+    }
+
+    private void printPlayerStatistics() {
+        System.out.println("\nYou are out of funds!\nUnfortunately you cannot continue to play.\n" +
+                "Hope you had a good time though!\nHere are your statistics from the game\n");
+        player.endGame();
+        System.out.println(player.toString());
+        input.close();
     }
 }
