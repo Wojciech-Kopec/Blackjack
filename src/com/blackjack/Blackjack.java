@@ -8,9 +8,7 @@ import java.util.Scanner;
 
 /**
  * TODO
- * (?)  Response validation -> As String, REGEX validation OR ENUM(?)
- * -> HIT, STAND, DOUBLE DOWN, SPLIT, INSURANCE (?)
- * (?)  FINAL variables
+ * Option menu - Play(1) & Quit(0)
  * Full tests coverage
  */
 
@@ -20,11 +18,17 @@ public class Blackjack {
     private Hand playerHand = new Hand();
     private Hand dealerHand = new Hand();
     private Scanner input = new Scanner(System.in);
+
     private int bet;
-    private int response;
+    private String response;
     private boolean isBust;
     private boolean hasDealerWon;
     private final int BLACKJACK_LIMIT = 21;
+
+    private final String HIT_REGEX = "(?i)^1|hit$";
+    private final String STAND_REGEX = "(?i)^2|stand$";
+    private final String PLAY_REGEX = "(?i)^1|play$";
+    private final String EXIT_REGEX = "(?i)^1|exit$";
 
     public void run() {
         System.out.println("Welcome to Blackjack console com.application!\n");
@@ -56,11 +60,14 @@ public class Blackjack {
     private int getPlayerBet() {
         do {
             System.out.println("Currently you have $" + player.getBalance() + "\nHow much would you like to bet?");
-            /* TODO INPUT VALIDATION */
+            while (!input.hasNextInt()) {
+                System.out.println("Please enter your bet in numerical format.");
+                input.next();
+            }
             bet = input.nextInt();
             if (bet > player.getBalance())
-                System.out.println("You cannot bet more than you have\n");
-        } while (bet > player.getBalance());
+                System.out.println("You cannot bet more than you have!\n");
+        } while (bet <= 0 && bet > player.getBalance());
         return bet;
     }
 
@@ -72,24 +79,21 @@ public class Blackjack {
     }
 
     private void playersTurn() {
-        while (response != 2 && !hasPlayerBusted()) {
+        do {
             System.out.println("Your hand:\n" + playerHand.toString());
             System.out.println("Your cards are valued at: " + playerHand.cardsValue() + "\n");
             System.out.println("Dealer hand: " + dealerHand.getCard(0).toString() + " and [HIDDEN]");
             getPlayersResponse();
-        }
-        resetResponse();
-    }
-
-    private void resetResponse() {
-        response = 0;
+        } while (!(response.equals(STAND_REGEX) || hasPlayerBusted()));
     }
 
     private void getPlayersResponse() {
         System.out.println("Would you like to (1)Hit or (2)Stand?");
-            /* TODO input validation */
-        response = input.nextInt();
-        if (response == 1)
+        while (!(input.hasNext(HIT_REGEX) || input.hasNext(STAND_REGEX))) {
+            System.out.println("Looks like you are trying to enter invalid characters. Try again.");
+        }
+        response = input.next();
+        if (response.matches(HIT_REGEX))
             playerHit();
     }
 
