@@ -15,7 +15,7 @@ public class Deck {
     private void createFullDeck() {
         for (Suit cardSuit : Suit.values()) {
             for (Rank cardRank : Rank.values()) {
-                cards.add(new Card(cardSuit, cardRank));
+                cards.add(new Card(cardRank, cardSuit));
             }
         }
     }
@@ -24,7 +24,7 @@ public class Deck {
         Collections.shuffle(cards);
     }
 
-    void addCard(Card addCard){
+    public void addCard(Card addCard){
         cards.add(addCard);
     }
 
