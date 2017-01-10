@@ -28,7 +28,7 @@ public class Blackjack {
     private final String HIT_REGEX = "(?i)^1|hit$";
     private final String STAND_REGEX = "(?i)^2|stand$";
     private final String PLAY_REGEX = "(?i)^1|play$";
-    private final String EXIT_REGEX = "(?i)^1|exit$";
+    private final String EXIT_REGEX = "(?i)^0|exit$";
 
     public void run() {
         System.out.println("Welcome to Blackjack console com.application!\n");
@@ -91,6 +91,7 @@ public class Blackjack {
         System.out.println("Would you like to (1)Hit or (2)Stand?");
         while (!(input.hasNext(HIT_REGEX) || input.hasNext(STAND_REGEX))) {
             System.out.println("Looks like you are trying to enter invalid characters. Try again.");
+            input.next();
         }
         response = input.next();
         if (response.matches(HIT_REGEX))
