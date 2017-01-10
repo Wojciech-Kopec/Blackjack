@@ -44,9 +44,6 @@ public class DataManager {
     }
 
 
-
-
-
     public void printFile() {
         try {
             String line;
@@ -62,10 +59,5 @@ public class DataManager {
                 e.printStackTrace();
             }
         }
-    }
-
-    public DataManager() {
-        Instant startTime = Instant.now();
-        Date timestamp = new Date();
     }
 }

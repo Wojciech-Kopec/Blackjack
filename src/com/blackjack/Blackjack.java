@@ -2,6 +2,7 @@ package com.blackjack;
 
 import com.cards.Deck;
 import com.cards.Hand;
+import com.datacontrol.DataReader;
 import com.datacontrol.Player;
 
 import java.util.Scanner;
@@ -13,11 +14,12 @@ import java.util.Scanner;
  */
 
 public class Blackjack {
-    private Player player = new Player();
-    private Deck playingDeck = new Deck();
-    private Hand playerHand = new Hand();
-    private Hand dealerHand = new Hand();
-    private Scanner input = new Scanner(System.in);
+    private final Player player = new Player();
+    private final Deck playingDeck = new Deck();
+    private final Hand playerHand = new Hand();
+    private final Hand dealerHand = new Hand();
+    private final DataReader dataReader = new DataReader();
+    private final Scanner input = new Scanner(System.in);
 
     private int bet;
     private String response;
@@ -37,9 +39,7 @@ public class Blackjack {
     }
 
     private void getPlayerName() {
-        System.out.println("Please state your name: ");
-        player.setPlayerName(input.nextLine());
-        /* TODO Check if in database - Welcome msg */
+        player.setPlayerName(dataReader.getPlayerName());
     }
 
     private void gameLoop() {
@@ -88,12 +88,7 @@ public class Blackjack {
     }
 
     private void getPlayersResponse() {
-        System.out.println("Would you like to (1)Hit or (2)Stand?");
-        while (!(input.hasNext(HIT_REGEX) || input.hasNext(STAND_REGEX))) {
-            System.out.println("Looks like you are trying to enter invalid characters. Try again.");
-            input.next();
-        }
-        response = input.next();
+        response = dataReader.getResponse();
         if (response.matches(HIT_REGEX))
             playerHit();
     }
@@ -108,8 +103,7 @@ public class Blackjack {
         if (playerHand.cardsValue() > BLACKJACK_LIMIT) {
             System.out.println("BUST!\nYour total value is currently: " + playerHand.cardsValue());
             System.out.println("Dealer wins.\n");
-            player.decrementPlayerBalanceByBet(bet);
-            player.incrementLosesByOne();
+            player.lose(bet);
             isBust = true;
         }
         return isBust;
@@ -132,8 +126,7 @@ public class Blackjack {
         hasDealerWon = false;
         if (dealerHand.cardsValue() > playerHand.cardsValue()) {
             System.out.println("Dealer wins. You lose $" + bet + "\n");
-            player.decrementPlayerBalanceByBet(bet);
-            player.incrementLosesByOne();
+            player.lose(bet);
             hasDealerWon = true;
         }
         return hasDealerWon;
@@ -142,23 +135,20 @@ public class Blackjack {
     private void determineWinner() {
         if (dealerHand.cardsValue() > BLACKJACK_LIMIT) {
             System.out.println("Dealer busts! YOU WIN!\n");
-            player.incrementPlayerBalanceByBet(bet);
-            player.incrementWinsByOne();
+            player.win(bet);
             return;
         }
         if (playerHand.cardsValue() == dealerHand.cardsValue()) {
             System.out.println("PUSH. No one wins this round.\n");
-            player.incrementPushesByOne();
+            player.push();
         }
         if (playerHand.cardsValue() > dealerHand.cardsValue()) {
             System.out.println("YOU WIN!\n");
-            player.incrementPlayerBalanceByBet(bet);
-            player.incrementWinsByOne();
+            player.win(bet);
         }
         if (dealerHand.cardsValue() > playerHand.cardsValue()) {
             System.out.println("Dealers wins. You lose $" + bet + "\n");
-            player.decrementPlayerBalanceByBet(bet);
-            player.incrementLosesByOne();
+            player.lose(bet);
         }
     }
 

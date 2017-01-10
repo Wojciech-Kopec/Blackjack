@@ -12,8 +12,8 @@ public class Player implements Serializable {
     private int pushes;
     private int loses;
     private Duration timePlayed;
-    private Date timestamp;
-    private Instant startTime;
+    private final Date timestamp;
+    private final Instant startTime;
 
     public int incrementLosesByOne() {
         return loses++;
@@ -44,10 +44,23 @@ public class Player implements Serializable {
     }
 
     public void endGame() {
-        Instant endTime = Instant.now();
+        final Instant endTime = Instant.now();
         timePlayed = Duration.between(startTime, endTime);
     }
 
+    public void win(int bet) {
+        balance += bet;
+        wins++;
+    }
+
+    public void lose(int bet) {
+        balance -= bet;
+        loses++;
+    }
+
+    public void push() {
+        pushes++;
+    }
     @Override
     public String toString() {
         return "\nYour game statistics:\n" +

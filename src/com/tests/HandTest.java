@@ -42,8 +42,6 @@ public class HandTest {
         dealerHand.draw(deck);
         playerHand.draw(deck);
         dealerHand.draw(deck);
-        playerHand.draw(deck);
-        dealerHand.draw(deck);
         playerHand.moveAllToDeck(deck);
         dealerHand.moveAllToDeck(deck);
         assertThat(playerHand.getSize(), is(0));
