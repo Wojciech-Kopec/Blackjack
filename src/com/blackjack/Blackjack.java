@@ -5,32 +5,17 @@ import com.cards.Hand;
 import com.datacontrol.DataReader;
 import com.datacontrol.Player;
 
-import java.util.Scanner;
-
-/**
- * TODO
- * Option menu - Play(1) & Quit(0)
- * Full tests coverage
- */
-
 public class Blackjack {
     private final Player player = new Player();
     private final Deck playingDeck = new Deck();
     private final Hand playerHand = new Hand();
     private final Hand dealerHand = new Hand();
     private final DataReader dataReader = new DataReader();
-    private final Scanner input = new Scanner(System.in);
 
     private int bet;
-    private String response;
     private boolean isBust;
     private boolean hasDealerWon;
     private final int BLACKJACK_LIMIT = 21;
-
-    private final String HIT_REGEX = "(?i)^1|hit$";
-    private final String STAND_REGEX = "(?i)^2|stand$";
-    private final String PLAY_REGEX = "(?i)^1|play$";
-    private final String EXIT_REGEX = "(?i)^0|exit$";
 
     public void run() {
         System.out.println("Welcome to Blackjack console com.application!\n");
@@ -43,7 +28,7 @@ public class Blackjack {
     }
 
     private void gameLoop() {
-        while (player.getBalance() > 0) {
+        do {
             getPlayerBet();
             initialDraw();
             playersTurn();
@@ -53,21 +38,18 @@ public class Blackjack {
                     determineWinner();
             }
             clearHands();
-        }
+            displayPlayersBalance();
+        } while (player.getBalance() > 0 && !dataReader.willGameBeContinued());
         printPlayerStatistics();
     }
 
     private int getPlayerBet() {
+        System.out.println("How much would you like to bet?");
         do {
-            System.out.println("Currently you have $" + player.getBalance() + "\nHow much would you like to bet?");
-            while (!input.hasNextInt()) {
-                System.out.println("Please enter your bet in numerical format.");
-                input.next();
-            }
-            bet = input.nextInt();
+            bet = dataReader.validateBet();
             if (bet > player.getBalance())
                 System.out.println("You cannot bet more than you have!\n");
-        } while (bet <= 0 && bet > player.getBalance());
+        } while (bet > player.getBalance());
         return bet;
     }
 
@@ -83,14 +65,10 @@ public class Blackjack {
             System.out.println("Your hand:\n" + playerHand.toString());
             System.out.println("Your cards are valued at: " + playerHand.cardsValue() + "\n");
             System.out.println("Dealer hand: " + dealerHand.getCard(0).toString() + " and [HIDDEN]");
-            getPlayersResponse();
-        } while (!(response.equals(STAND_REGEX) || hasPlayerBusted()));
-    }
-
-    private void getPlayersResponse() {
-        response = dataReader.getResponse();
-        if (response.matches(HIT_REGEX))
-            playerHit();
+            if (dataReader.isHitChosen())
+                playerHit();
+            else break;
+        } while (!hasPlayerBusted());
     }
 
     private void playerHit() {
@@ -157,11 +135,16 @@ public class Blackjack {
         dealerHand.moveAllToDeck(playingDeck);
     }
 
+    private void displayPlayersBalance() {
+        System.out.println("Currently you have $" + player.getBalance());
+    }
+
     private void printPlayerStatistics() {
-        System.out.println("\nYou are out of funds!\nUnfortunately you cannot continue to play.\n" +
-                "Hope you had a good time though!\nHere are your statistics from the game\n");
+        if(player.getBalance() == 0)
+        System.out.println("\nYou are out of funds!\nUnfortunately you cannot continue to play.\n");
+        System.out.println("Hope you had a good time though!\nHere are your statistics from the game\n");
         player.endGame();
         System.out.println(player.toString());
-        input.close();
+        dataReader.closeScanner();
     }
 }
