@@ -13,8 +13,8 @@ public class Deck {
     }
 
     private void createFullDeck() {
-        for (Suit cardSuit : Suit.values()) {
-            for (Rank cardRank : Rank.values()) {
+        for (Card.Suit cardSuit : Card.Suit.values()) {
+            for (Card.Rank cardRank : Card.Rank.values()) {
                 cards.add(new Card(cardRank, cardSuit));
             }
         }

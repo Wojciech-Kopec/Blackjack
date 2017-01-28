@@ -12,28 +12,8 @@ public class Player implements Serializable {
     private int pushes;
     private int loses;
     private Duration timePlayed;
-    private final Date timestamp;
+    private final Date currentDate;
     private final Instant startTime;
-
-    public int incrementLosesByOne() {
-        return loses++;
-    }
-
-    public int incrementWinsByOne() {
-        return wins++;
-    }
-
-    public int incrementPushesByOne() {
-        return pushes++;
-    }
-
-    public int incrementPlayerBalanceByBet(int bet) {
-        return balance += bet;
-    }
-
-    public int decrementPlayerBalanceByBet(int bet) {
-        return balance -= bet;
-    }
 
     public int getBalance() {
         return balance;
@@ -63,18 +43,18 @@ public class Player implements Serializable {
     }
     @Override
     public String toString() {
-        return "\nYour game statistics:\n" +
-                "Name\t" + playerName + "\n" +
-                "Balance\t" + balance + "\n" +
-                "Wins\t" + wins + "\n" +
-                "Pushes\t" + pushes + "\n" +
-                "Loses\t" + loses + "\n" +
-                "Time elapsed\t" + timePlayed + "\n" +
-                "Timestamp\t" + timestamp;
+        return "\nYour game statistics:" +
+                "\nName\t\t" + playerName +
+                "\nBalance\t\t" + balance +
+                "\nWins\t\t" + wins +
+                "\nPushes\t\t" + pushes +
+                "\nLoses\t\t" + loses +
+                "\nTime elapsed\t\t" + timePlayed +
+                "\nDate\t\t" + currentDate;
     }
 
     public Player() {
         startTime = Instant.now();
-        timestamp = new Date();
+        currentDate = new Date();
     }
 }

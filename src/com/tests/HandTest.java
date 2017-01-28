@@ -29,10 +29,10 @@ public class HandTest {
 
     @Test
     public void casesWithAcesTest() {
-        playerHand.addCard(new Card(Rank.NINE, Suit.HEARTS));
-        playerHand.addCard(new Card(Rank.ACE, Suit.HEARTS));
+        playerHand.addCard(new Card(Card.Rank.NINE, Card.Suit.HEARTS));
+        playerHand.addCard(new Card(Card.Rank.ACE, Card.Suit.HEARTS));
         assertThat(playerHand.cardsValue(), is(20));
-        playerHand.addCard(new Card(Rank.ACE, Suit.HEARTS));
+        playerHand.addCard(new Card(Card.Rank.ACE, Card.Suit.HEARTS));
         assertThat(playerHand.cardsValue(), is(21));
     }
 

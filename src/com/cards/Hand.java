@@ -17,9 +17,9 @@ public class Hand extends Deck {
         int totalValue = 0;
         for(Card card: cards) {
             totalValue += card.getRank().getValue();
-            if (card.getRank() == Rank.ACE && totalValue <= 10)
+            if (card.getRank() == Card.Rank.ACE && totalValue <= 10)
                 totalValue += 11;
-            else if(card.getRank() == Rank.ACE && totalValue > 10)
+            else if(card.getRank() == Card.Rank.ACE && totalValue > 10)
                 totalValue += 1;
         }
         return totalValue;

@@ -12,7 +12,7 @@ public class Blackjack {
     private final Hand dealerHand = new Hand();
     private final DataReader dataReader = new DataReader();
 
-    private int bet;
+    private int bet = 0;
     private boolean isBust;
     private boolean hasDealerWon;
     private final int BLACKJACK_LIMIT = 21;
@@ -39,14 +39,14 @@ public class Blackjack {
             }
             clearHands();
             displayPlayersBalance();
-        } while (player.getBalance() > 0 && !dataReader.willGameBeContinued());
+        } while (player.getBalance() > 0 && dataReader.willGameBeContinued());
         printPlayerStatistics();
     }
 
     private int getPlayerBet() {
         System.out.println("How much would you like to bet?");
         do {
-            bet = dataReader.validateBet();
+            dataReader.validateBet(bet);
             if (bet > player.getBalance())
                 System.out.println("You cannot bet more than you have!\n");
         } while (bet > player.getBalance());
@@ -61,14 +61,13 @@ public class Blackjack {
     }
 
     private void playersTurn() {
-        do {
+        while (!hasPlayerBusted()) {
             System.out.println("Your hand:\n" + playerHand.toString());
             System.out.println("Your cards are valued at: " + playerHand.cardsValue() + "\n");
             System.out.println("Dealer hand: " + dealerHand.getCard(0).toString() + " and [HIDDEN]");
-            if (dataReader.isHitChosen())
-                playerHit();
+            if (dataReader.isHitChosen()) playerHit();
             else break;
-        } while (!hasPlayerBusted());
+        }
     }
 
     private void playerHit() {
@@ -112,7 +111,7 @@ public class Blackjack {
 
     private void determineWinner() {
         if (dealerHand.cardsValue() > BLACKJACK_LIMIT) {
-            System.out.println("Dealer busts! YOU WIN!\n");
+            System.out.println("Dealer busts! YOU WIN $" + bet + "\n");
             player.win(bet);
             return;
         }
@@ -121,7 +120,7 @@ public class Blackjack {
             player.push();
         }
         if (playerHand.cardsValue() > dealerHand.cardsValue()) {
-            System.out.println("YOU WIN!\n");
+            System.out.println("YOU WIN $" + bet + "\n");
             player.win(bet);
         }
         if (dealerHand.cardsValue() > playerHand.cardsValue()) {
