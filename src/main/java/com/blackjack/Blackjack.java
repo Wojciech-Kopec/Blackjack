@@ -49,7 +49,7 @@ public class Blackjack {
             bet = dataReader.validateBet();
             if (bet > player.getBalance())
                 System.out.println("You cannot bet more than you have!\n");
-        } while (bet > player.getBalance());
+        } while (bet > player.getBalance() || bet > 0);
         return bet;
     }
 

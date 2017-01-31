@@ -10,6 +10,8 @@ public class DataReader {
 
     private Scanner input = new Scanner(System.in);
 
+
+
     public String getPlayerName() {
         System.out.println("Please state your name: ");
         return input.nextLine();
@@ -18,15 +20,15 @@ public class DataReader {
 
     public int validateBet() {
         int bet = 0;
-        while (bet <= 0) {
-            while (!input.hasNextInt()) {
+            if (!input.hasNextInt()) {
                 System.out.println("Your bet must be entered in numerical format!");
                 input.nextLine();
+                return bet;
             }
             bet = input.nextInt();
             input.nextLine();
-            if (bet <= 0) System.out.println("Your bet have to be positive!");
-        }
+            if (bet <= 0)
+                System.out.println("Your bet have to be a positive amount!");
         return bet;
     }
 
