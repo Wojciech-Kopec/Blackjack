@@ -18,7 +18,7 @@ public class Blackjack {
     private final int BLACKJACK_LIMIT = 21;
 
     public void run() {
-        System.out.println("Welcome to Blackjack console com.application!\n");
+        System.out.println("Welcome to Blackjack console application!\n");
         getPlayerName();
         gameLoop();
     }
@@ -46,7 +46,7 @@ public class Blackjack {
     private int getPlayerBet() {
         System.out.println("How much would you like to bet?");
         do {
-            dataReader.validateBet(bet);
+            bet = dataReader.validateBet();
             if (bet > player.getBalance())
                 System.out.println("You cannot bet more than you have!\n");
         } while (bet > player.getBalance());

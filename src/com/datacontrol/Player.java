@@ -44,13 +44,13 @@ public class Player implements Serializable {
     @Override
     public String toString() {
         return "\nYour game statistics:" +
-                "\nName\t\t" + playerName +
-                "\nBalance\t\t" + balance +
-                "\nWins\t\t" + wins +
-                "\nPushes\t\t" + pushes +
-                "\nLoses\t\t" + loses +
-                "\nTime elapsed\t\t" + timePlayed +
-                "\nDate\t\t" + currentDate;
+                "\nName\t\t\t" + playerName +
+                "\nBalance\t\t\t" + balance +
+                "\nWins\t\t\t" + wins +
+                "\nPushes\t\t\t" + pushes +
+                "\nLoses\t\t\t" + loses +
+                "\nTime elapsed\t" + timePlayed +
+                "\nDate\t\t\t" + currentDate;
     }
 
     public Player() {

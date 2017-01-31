@@ -16,7 +16,8 @@ public class DataReader {
         /* TODO Check if in database - Welcome msg */
     }
 
-    public int validateBet(int bet) {
+    public int validateBet() {
+        int bet = 0;
         while (bet <= 0) {
             while (!input.hasNextInt()) {
                 System.out.println("Your bet must be entered in numerical format!");

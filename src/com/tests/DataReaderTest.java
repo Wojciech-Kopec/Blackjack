@@ -24,25 +24,25 @@ public class DataReaderTest {
     @Test
     public void validateBetWithCorrectNumber() {
         simulateInput("100");
-        assertThat(dataReader.validateBet(0), is(100));
+        assertThat(dataReader.validateBet(), is(100));
     }
 
     @Test
     public void validateBetWithIncorrectNumber() {
         simulateInput("-100");
-        assertThat(dataReader.validateBet(0), is(0));
+        assertThat(dataReader.validateBet(), is(0));
     }
 
     @Test
     public void validateBetWithZero() {
         simulateInput("0");
-        assertThat(dataReader.validateBet(0), is(0));
+        assertThat(dataReader.validateBet(), is(0));
     }
 
     @Test
     public void validateBetWithString() {
         simulateInput("test string");
-        assertThat(dataReader.validateBet(0), is(0));
+        assertThat(dataReader.validateBet(), is(0));
     }
 
     @Test
