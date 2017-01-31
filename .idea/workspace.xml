@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="91f41699-c339-4ecb-adef-155946d0fb7e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/blackjack/Blackjack.java" afterPath="$PROJECT_DIR$/src/com/blackjack/Blackjack.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/datacontrol/DataReader.java" afterPath="$PROJECT_DIR$/src/com/datacontrol/DataReader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/datacontrol/Player.java" afterPath="$PROJECT_DIR$/src/com/datacontrol/Player.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/tests/DataReaderTest.java" afterPath="$PROJECT_DIR$/src/com/tests/DataReaderTest.java" />
-    </list>
+    <list default="true" id="91f41699-c339-4ecb-adef-155946d0fb7e" name="Default" comment="" />
     <ignored path="Blackjack.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -209,8 +203,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -335,11 +327,13 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Java/ZADANIA Z JAVY" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -910,6 +904,7 @@
       <workItem from="1485539436707" duration="4125000" />
       <workItem from="1485628811933" duration="7382000" />
       <workItem from="1485728705096" duration="40000" />
+      <workItem from="1485890007746" duration="11000" />
     </task>
     <task id="LOCAL-00001" summary="Getters &amp; Setters improvement">
       <created>1481297458910</created>
@@ -980,10 +975,10 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38215000" />
+    <option name="totallyTimeSpent" value="38226000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1698" height="1018" extended-state="0" />
+    <frame x="-9" y="-9" width="1698" height="1018" extended-state="1" />
     <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
